@@ -1,39 +1,39 @@
 package entity;
 
 
-public class Account {
+public class Account{
 
-    private Long id;
-    private Long userId;
-    private Long moneyAmount;
+    private int  id;
+    private int userId;
+    private int moneyAmount;
 
-    public Account(Long id, Long userId, Long moneyAmount) {
+    public Account(int id, int userId, int moneyAmount) {
         this.id = id;
         this.userId = userId;
         this.moneyAmount = moneyAmount;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public Long getMoneyAmount() {
+    public int getMoneyAmount() {
         return moneyAmount;
     }
 
-    public void setMoneyAmount(Long moneyAmount) {
+    public void setMoneyAmount(int moneyAmount) {
         this.moneyAmount = moneyAmount;
     }
 }

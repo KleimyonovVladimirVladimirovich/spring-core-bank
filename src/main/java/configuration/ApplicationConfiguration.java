@@ -3,6 +3,8 @@ package configuration;
 import com.kleim.OperationsConsoleListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import service.AccountService;
+import service.UserService;
 
 import java.util.Scanner;
 
@@ -19,5 +21,15 @@ public class ApplicationConfiguration {
             Scanner scanner
     ) {
         return new OperationsConsoleListener(scanner);
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService();
+    }
+
+    @Bean
+    public AccountService accountService() {
+        return new AccountService();
     }
 }

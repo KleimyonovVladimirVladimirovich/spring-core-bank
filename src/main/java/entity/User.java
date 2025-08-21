@@ -5,39 +5,27 @@ import java.util.List;
 
 public class User {
 
-    private Long id;
+    private final int id;
 
-    private String login;
+    private final String login;
 
-    List<String> accountList;
+    private final List<Account> accountList;
 
-    public User(Long id, String login, List<String> accountList) {
+    public User(int id, String login, List<Account> accountList) {
         this.id = id;
         this.login = login;
         this.accountList = accountList;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public List<String> getAccountList() {
+    public List<Account> getAccountList() {
         return accountList;
-    }
-
-    public void setAccountList(List<String> accountList) {
-        this.accountList = accountList;
     }
 }
