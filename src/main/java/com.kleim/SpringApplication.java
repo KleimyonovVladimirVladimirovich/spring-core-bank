@@ -9,7 +9,9 @@ public class SpringApplication {
                 new AnnotationConfigApplicationContext("com.kleim");
 
         var listener = context.getBean(OperationsConsoleListener.class);
+        listener.startListen();
         listener.consoleListener();
+        listener.endListen();
     }
 
 }

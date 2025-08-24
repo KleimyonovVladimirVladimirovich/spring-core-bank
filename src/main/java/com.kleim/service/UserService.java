@@ -1,6 +1,7 @@
-package service;
+package com.kleim.service;
 
-import entity.User;
+import com.kleim.entity.Account;
+import com.kleim.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
@@ -11,15 +12,17 @@ public class UserService {
     private final Map<Integer, User> userMap;
     private final Set<String> takingLogins;
     private int idCounter;
-    private final AccountService accountService;
-
     @Autowired
-    public UserService(AccountService accountService) {
-        this.accountService = accountService;
+    private AccountService accountService;
+
+
+
+    public UserService() {
         this.takingLogins = new HashSet<>();
-;        this.userMap = new HashMap<>();
+;       this.userMap = new HashMap<>();
         this.idCounter = 0;
     }
+
 
 
     public User createUser(String login) {
@@ -28,20 +31,26 @@ public class UserService {
         }
         takingLogins.add(login);
         idCounter++;
-        var newUser = new User(idCounter, login, new ArrayList<>());
-
-        var newAccount = accountService.createAccount(newUser);
-        newUser.getAccountList().add(newAccount);
-        userMap.put(newUser.getId(), newUser);
-        return newUser;
+        User user = new User(idCounter, login, new ArrayList<>());
+        Account account = accountService.createAccount(user);
+        user.getAccountList().add(account);
+        userMap.put(user.getId(), user);
+        return user;
     }
+
+
 
     public Optional<User> findUserById(int id) {
         return Optional.ofNullable(userMap.get(id));
     }
 
+
+
     public List<User> getAllUsers() {
-        return userMap.values().stream().toList();
+        return userMap
+                .values()
+                .stream()
+                .toList();
     }
 
 }

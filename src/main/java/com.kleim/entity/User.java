@@ -1,4 +1,4 @@
-package entity;
+package com.kleim.entity;
 
 import java.util.List;
 
@@ -27,5 +27,14 @@ public class User {
 
     public List<Account> getAccountList() {
         return accountList;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", accountList=" + accountList +
+                '}';
     }
 }
