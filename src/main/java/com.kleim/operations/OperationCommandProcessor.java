@@ -1,4 +1,5 @@
-package operations;
+package com.kleim.operations;
+
 
 public interface OperationCommandProcessor {
 

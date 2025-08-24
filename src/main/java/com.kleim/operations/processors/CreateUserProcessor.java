@@ -1,12 +1,13 @@
-package operations.processors;
+package com.kleim.operations.processors;
 
 import com.kleim.entity.User;
 import com.kleim.service.UserService;
-import operations.ConsoleOperationType;
-import operations.OperationCommandProcessor;
+import com.kleim.operations.ConsoleOperationType;
+import com.kleim.operations.OperationCommandProcessor;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-
+@Component
 public class CreateUserProcessor implements OperationCommandProcessor {
 
     private final Scanner scanner;

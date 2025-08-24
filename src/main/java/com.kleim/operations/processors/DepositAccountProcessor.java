@@ -1,13 +1,12 @@
-package operations.processors;
+package com.kleim.operations.processors;
 
-import com.kleim.entity.Account;
 import com.kleim.service.AccountService;
-import operations.ConsoleOperationType;
-import operations.OperationCommandProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kleim.operations.ConsoleOperationType;
+import com.kleim.operations.OperationCommandProcessor;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-
+@Component
 public class DepositAccountProcessor implements OperationCommandProcessor {
 
     private final AccountService accountService;

@@ -2,23 +2,27 @@ package com.kleim.service;
 
 import com.kleim.entity.Account;
 import com.kleim.entity.User;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
-
+@Component
 public class AccountService {
 
     private final Map<Integer, Account> accountMap;
     private int idCounter;
+    private final AccountProperties accountProperties;
 
-
-    public AccountService(Map<Integer, Account> accountMap) {
+    public AccountService(AccountProperties accountProperties) {
+        this.accountProperties = accountProperties;
         this.accountMap = new HashMap<>();
         this.idCounter = 0;
     }
 
     public Account createAccount(User user) {
       idCounter++;
-      Account account = new Account(idCounter,user.getId(), 0);
+      Account account = new Account(idCounter,user.getId(), accountProperties.getDefaultAccountAmount());
       accountMap.put(account.getId(), account);
       return account;
     }
@@ -76,8 +80,12 @@ public class AccountService {
         if (accountFrom.getMoneyAmount() < amountToTransfer) {
             throw  new IllegalArgumentException("Can not transfer from id %s to id %s%n".formatted(accountTo, accountFrom));
         }
-        accountMap.remove(accountId1);
 
+        int totalToDeposit = accountTo.getUserId() != accountFrom.getUserId()
+            ? (int) (amountToTransfer - amountToTransfer * accountProperties.getTransferCommision()) : amountToTransfer;
+
+        accountFrom.setMoneyAmount(accountFrom.getMoneyAmount() - amountToTransfer);
+        accountTo.setMoneyAmount(accountTo.getMoneyAmount() + totalToDeposit);
     }
 }
 

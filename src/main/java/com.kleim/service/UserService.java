@@ -3,21 +3,23 @@ package com.kleim.service;
 import com.kleim.entity.Account;
 import com.kleim.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-
+@Component
 public class UserService {
 
     private final Map<Integer, User> userMap;
     private final Set<String> takingLogins;
     private int idCounter;
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
 
 
 
-    public UserService() {
+    public UserService(AccountService accountService) {
+        this.accountService = accountService;
         this.takingLogins = new HashSet<>();
 ;       this.userMap = new HashMap<>();
         this.idCounter = 0;

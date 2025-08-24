@@ -1,4 +1,8 @@
-package operations;
+package com.kleim.operations;
+
+
+import org.springframework.stereotype.Component;
+
 
 public enum ConsoleOperationType {
      USER_CREATE ,

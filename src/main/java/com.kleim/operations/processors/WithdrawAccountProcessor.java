@@ -1,11 +1,12 @@
-package operations.processors;
+package com.kleim.operations.processors;
 
 import com.kleim.service.AccountService;
-import operations.ConsoleOperationType;
-import operations.OperationCommandProcessor;
+import com.kleim.operations.ConsoleOperationType;
+import com.kleim.operations.OperationCommandProcessor;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-
+@Component
 public class WithdrawAccountProcessor implements OperationCommandProcessor {
     private final AccountService accountService;
     private final Scanner scanner;
