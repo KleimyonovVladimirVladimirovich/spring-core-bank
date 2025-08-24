@@ -3,15 +3,13 @@ package com.kleim.configuration;
 import com.kleim.OperationsConsoleListener;
 import operations.ConsoleOperationType;
 import operations.OperationCommandProcessor;
-import operations.processors.CreateAccountProcessor;
-import operations.processors.CreateUserProcessor;
-import operations.processors.DepositAccountProcessor;
-import operations.processors.ShowAllUserProcessors;
+import operations.processors.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.kleim.service.AccountService;
 import com.kleim.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,7 +51,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public AccountService accountService() {
-        return new AccountService();
+        return new AccountService(new HashMap<>());
     }
 
 
@@ -77,6 +75,21 @@ public class ApplicationConfiguration {
     @Bean
     public DepositAccountProcessor depositAccountProcessor(AccountService accountService, Scanner scanner) {
         return new DepositAccountProcessor(accountService, scanner);
+    }
+
+    @Bean
+    public CloseAccountProcessor closeAccountProcessor(AccountService accountService, UserService userService, Scanner scanner) {
+        return new CloseAccountProcessor(accountService,userService,scanner);
+    }
+
+    @Bean
+    public WithdrawAccountProcessor withdrawAccountProcessor(AccountService accountService, Scanner scanner) {
+        return new WithdrawAccountProcessor(accountService,scanner);
+    }
+
+    @Bean
+    public TransferAccountProcessor transferAccountProcessor(Scanner scanner, AccountService accountService) {
+        return new TransferAccountProcessor(scanner, accountService);
     }
 
 }

@@ -9,13 +9,11 @@ public class AccountService {
 
     private final Map<Integer, Account> accountMap;
     private int idCounter;
-//    private final User user;
 
 
-    public AccountService() {
+    public AccountService(Map<Integer, Account> accountMap) {
         this.accountMap = new HashMap<>();
         this.idCounter = 0;
-
     }
 
     public Account createAccount(User user) {
@@ -58,6 +56,28 @@ public class AccountService {
         if (account.getMoneyAmount() < amountToWithdraw) {
             throw new IllegalArgumentException("Cannot withdraw from account id %s, money to account: %s%n".formatted(accountId, account.getMoneyAmount()));
         }
+        account.setMoneyAmount(account.getMoneyAmount() - amountToWithdraw);
+    }
+
+    public Account closeAccount(int accountId) {
+        return null;
+    }
+
+    public void transfer(int accountId1, int accountId2, int amountToTransfer) {
+        Account accountFrom = findAccountById(accountId1).orElseThrow(() ->
+                new IllegalArgumentException("No such account with id: %s".formatted(accountId1)
+                ));
+
+        Account accountTo = findAccountById(accountId2).orElseThrow(() ->
+                new IllegalArgumentException("No such account with id: %s".formatted(accountId2)));
+        if (amountToTransfer <= 0) {
+            throw new IllegalArgumentException("No money for transfer between accounts.");
+        }
+        if (accountFrom.getMoneyAmount() < amountToTransfer) {
+            throw  new IllegalArgumentException("Can not transfer from id %s to id %s%n".formatted(accountTo, accountFrom));
+        }
+        accountMap.remove(accountId1);
+
     }
 }
 

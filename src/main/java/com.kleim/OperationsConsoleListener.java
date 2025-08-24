@@ -49,7 +49,7 @@ public class OperationsConsoleListener {
            var processor = processorMap.get(operation);
            processor.processOperation();
        } catch (Exception e) {
-           System.out.printf("Next operation not complete=%s", operation);
+           System.out.printf("Next operation not complete=%s\n", operation);
        }
 
     }
